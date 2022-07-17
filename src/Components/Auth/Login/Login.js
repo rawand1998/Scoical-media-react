@@ -6,6 +6,7 @@ function Login() {
 const [password,setPassword] = useState('')
 
 const {LoginAuth} = useContext(AuthContetx)
+
 const Login =(e)=>{
     e.preventDefault()
     LoginAuth(email,password)

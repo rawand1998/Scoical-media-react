@@ -3,7 +3,8 @@ import { auth, db } from "../firebase/firebase";
 export const AuthContetx = React.createContext();
 
 function AuthProviders({ children }) {
-    const [id,setId] = useState('')
+  const [id, setId] = useState("");
+
   const RegisterAuth = async (email, password, name) => {
     try {
       await auth.createUserWithEmailAndPassword(email, password).then((res) => {
@@ -18,19 +19,18 @@ function AuthProviders({ children }) {
       console.error(err, "err");
     }
   };
-  const LoginAuth = async (email,password) => {
-try{
-    await auth.signInWithEmailAndPassword(email,password).then((res)=>{
-        
-    })
-
-}catch (err) {
-    console.log(err, "err");
-}
-
-  }
+  const LoginAuth = async (email, password) => {
+    try {
+      await auth.signInWithEmailAndPassword(email, password).then((res) => {
+        setId(res.user.uid);
+      });
+    } catch (err) {
+      console.log(err, "err");
+    }
+  };
+ 
   return (
-    <AuthContetx.Provider value={{ RegisterAuth ,LoginAuth}}>
+    <AuthContetx.Provider value={{ RegisterAuth, LoginAuth,id }}>
       {children}
     </AuthContetx.Provider>
   );
