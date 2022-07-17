@@ -37,8 +37,17 @@ const AddPost = async (text)=>{
         })
     }catch(err){console.log(err)}
 }
+const AddComments = async (comment)=>{
+   
+    try{
+        db.collection('comments').doc(id).set({
+            uid:id,
+            comment:comment
+        })
+    }catch(err){console.log(err)}
+}
   return (
-    <AuthContetx.Provider value={{ RegisterAuth, LoginAuth, id ,AddPost}}>
+    <AuthContetx.Provider value={{ RegisterAuth, LoginAuth, id ,AddPost,AddComments}}>
       {children}
     </AuthContetx.Provider>
   );
