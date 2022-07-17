@@ -28,9 +28,17 @@ function AuthProviders({ children }) {
       console.log(err, "err");
     }
   };
- 
+const AddPost = async (text)=>{
+    console.log(text,"id",id)
+    try{
+        db.collection('posts').doc(id).set({
+            uid:id,
+            text:text
+        })
+    }catch(err){console.log(err)}
+}
   return (
-    <AuthContetx.Provider value={{ RegisterAuth, LoginAuth,id }}>
+    <AuthContetx.Provider value={{ RegisterAuth, LoginAuth, id ,AddPost}}>
       {children}
     </AuthContetx.Provider>
   );
