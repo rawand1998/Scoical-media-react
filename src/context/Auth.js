@@ -46,8 +46,17 @@ const AddComments = async (comment)=>{
         })
     }catch(err){console.log(err)}
 }
+const AddLikes = async (likes)=>{
+   
+    try{
+        db.collection('likes').doc(id).set({
+            uid:id,
+            likes:likes
+        })
+    }catch(err){console.log(err)}
+}
   return (
-    <AuthContetx.Provider value={{ RegisterAuth, LoginAuth, id ,AddPost,AddComments}}>
+    <AuthContetx.Provider value={{ RegisterAuth, LoginAuth, id ,AddPost,AddComments,AddLikes}}>
       {children}
     </AuthContetx.Provider>
   );
