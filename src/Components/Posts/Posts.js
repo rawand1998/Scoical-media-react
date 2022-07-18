@@ -28,7 +28,7 @@ function Posts() {
             </button>
             {show?<div><Comments postId={item.id}/></div>:<p></p>}
            
-            <Likes postId={item.id}/>
+            {/* <Likes postId={item.id}/> */}
         </div>
         </div>
       )}

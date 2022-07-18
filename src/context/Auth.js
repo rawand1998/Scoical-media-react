@@ -8,6 +8,7 @@ function AuthProviders({ children }) {
   const [allPost, setAllPost] = useState([]);
   const [comments,setComments]= useState([]);
 
+  const [like,setlike] = useState([])
   const RegisterAuth = async (email, password, name) => {
     try {
       await auth.createUserWithEmailAndPassword(email, password).then((res) => {
@@ -59,10 +60,10 @@ function AuthProviders({ children }) {
   };
   const AddLikes = async (likes, postId) => {
     try {
-      db.collection("likes").add({
+      db.collection("likes").doc().set({
         uid: userid,
         postId: postId,
-        likes: likes,
+        likes,
       });
     } catch (err) {
       console.log(err);
@@ -89,6 +90,16 @@ function AuthProviders({ children }) {
       );
     })
   }
+
+  const getlike= async(postId)=>{
+    console.log(postId)
+    
+    db.collection('likes').where('postId','==',postId).onSnapshot((snapshot) => {
+      setlike(
+        snapshot.docs.map((item) => ({ ...item.data(), id: item.id }))
+      );
+    })
+  }
   return (
     <AuthContetx.Provider
       value={{
@@ -100,7 +111,7 @@ function AuthProviders({ children }) {
         AddLikes,
         getAllPosts,
         allPost,
-        getAllComment,comments
+        getAllComment,comments,like,getlike
       }}
     >
       {children}
