@@ -7,7 +7,7 @@ function AuthProviders({ children }) {
   const [postsId,setPostsId] = useState("");
   const [allPost, setAllPost] = useState([]);
   const [comments,setComments]= useState([]);
-
+const [name,setName] = useState("");
   const [like,setlike] = useState([])
   const RegisterAuth = async (email, password, name) => {
     try {
@@ -17,12 +17,18 @@ function AuthProviders({ children }) {
           uid: user.uid,
           name: name,
           email: email,
-        });
+        })
+        setName(name)
+        console.log(name)
+        
       });
     } catch (err) {
       console.error(err, "err");
     }
   };
+  // const getUsers=()=>{
+  //   db.collection('users').
+  // }
   const LoginAuth = async (email, password) => {
     try {
       await auth.signInWithEmailAndPassword(email, password).then((res) => {
@@ -33,12 +39,13 @@ function AuthProviders({ children }) {
     }
   };
   const AddPost = async (text) => {
-    console.log(text, "id", userid);
+   
     try {
       db.collection("posts")
         .add({
           uid: userid,
           text: text,
+          name:name
         })
         .then((res) => {
           setPostsId(res.id)
@@ -111,7 +118,7 @@ function AuthProviders({ children }) {
         AddLikes,
         getAllPosts,
         allPost,
-        getAllComment,comments,like,getlike
+        getAllComment,comments,like,getlike,name
       }}
     >
       {children}
