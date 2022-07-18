@@ -4,7 +4,7 @@ import CommentInput from '../Comments/CommentInput'
 import Likes from '../Likes/Likes'
 import Comments from '../Comments/Comments'
 function Posts() {
-    const {getAllPosts,allPost} = useContext(AuthContetx)
+    const {getAllPosts,allPost,name} = useContext(AuthContetx)
     console.log(allPost,"===============")
     const [show,setShow] = useState(false)
     useEffect(()=>{
@@ -17,7 +17,7 @@ function Posts() {
   return (
     <div>
         <div>
-       get all posts
+       get all posts {name}
       {allPost.map((item)=>
       
       <div>

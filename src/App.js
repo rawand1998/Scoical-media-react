@@ -10,11 +10,11 @@ function App() {
   return (
     <div className="App">
     
-    {/* <Register /> */}
-    <Login />
-    <PostInput />
-    <Posts />
-    {/* <CommentInput /> */}
+    <Register />
+    <Login /> 
+     <PostInput />
+    <Posts /> 
+     {/* <CommenInput /> */}
     {/* <Likes /> */}
     </div>
   );
