@@ -2,20 +2,20 @@
 import './App.css';
 import Login from './Components/Auth/Login/Login';
 import Register from './Components/Auth/Register/Register';
-import PostInput from './Components/Posts/PostInput'
-import CommentInput from './Components/Comments/CommentInput'
-import Likes from './Components/Likes/Likes'
-import Posts from './Components/Posts/Posts';
+
+import Home from './Components/Home/Home'
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 function App() {
   return (
     <div className="App">
-    
-    <Register />
-    <Login /> 
-     <PostInput />
-    <Posts /> 
-     {/* <CommenInput /> */}
-    {/* <Likes /> */}
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home/>}/>
+        <Route path="/login" element={<Login/>}/>
+        <Route path="/register" element={<Register/>}/>
+      </Routes>
+    </Router>
+   
     </div>
   );
 }
