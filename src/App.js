@@ -11,8 +11,8 @@ function App() {
     
     {/* <Register /> */}
     <Login />
-    {/* <PostInput /> */}
-    {/* <CommentInput /> */}
+    <PostInput />
+    <CommentInput />
     <Likes />
     </div>
   );

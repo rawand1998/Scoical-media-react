@@ -3,7 +3,8 @@ import { auth, db } from "../firebase/firebase";
 export const AuthContetx = React.createContext();
 
 function AuthProviders({ children }) {
-  const [id, setId] = useState("");
+  const [userid, setUserId] = useState("");
+  const [postId,setPostId] = useState("");
 
   const RegisterAuth = async (email, password, name) => {
     try {
@@ -22,27 +23,32 @@ function AuthProviders({ children }) {
   const LoginAuth = async (email, password) => {
     try {
       await auth.signInWithEmailAndPassword(email, password).then((res) => {
-        setId(res.user.uid);
+        setUserId(res.user.uid);
       });
     } catch (err) {
       console.log(err, "err");
     }
   };
   const AddPost = async (text) => {
-    console.log(text, "id", id);
+    console.log(text, "id", userid);
     try {
-      db.collection("posts").doc(id).set({
-        uid: id,
+      db.collection("posts").add({
+        uid: userid,
         text: text,
-      });
+      }).then((res)=>{
+      
+        setPostId(res.id)
+        
+      })
     } catch (err) {
       console.log(err);
     }
   };
   const AddComments = async (comment) => {
     try {
-      db.collection("comments").doc(id).set({
-        uid: id,
+      db.collection("comments").add({
+        uid: userid,
+        postId:postId,
         comment: comment,
       });
     } catch (err) {
@@ -51,8 +57,9 @@ function AuthProviders({ children }) {
   };
   const AddLikes = async (likes) => {
     try {
-      db.collection("likes").doc(id).set({
-        uid: id,
+      db.collection("likes").add({
+        uid: userid,
+        postId:postId,
         likes: likes,
       });
     } catch (err) {
@@ -61,7 +68,7 @@ function AuthProviders({ children }) {
   };
   return (
     <AuthContetx.Provider
-      value={{ RegisterAuth, LoginAuth, id, AddPost, AddComments, AddLikes }}
+      value={{ RegisterAuth, LoginAuth, userid, AddPost, AddComments, AddLikes }}
     >
       {children}
     </AuthContetx.Provider>
