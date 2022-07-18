@@ -1,0 +1,19 @@
+.post-container {
+  margin-top: 70px;
+  display: flex;
+  justify-content: center;
+}
+
+.post-container .input {
+  border: none;
+}
+.input:focus {
+  outline: none;
+  border-bottom: 1px solid #0080ff;
+}
+
+.post-container a {
+  border: 1px solid #ccc;
+  border-radius: 50px;
+  padding: 10px 20px;
+}

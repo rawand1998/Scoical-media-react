@@ -1,6 +1,6 @@
 import React,{useState,useContext} from 'react'
 import {AuthContetx} from '../../context/Auth'
-
+import './Style.css'
 function PostInput() {
     const [text,setText] =useState('')
     const {AddPost} = useContext(AuthContetx)
@@ -9,10 +9,11 @@ function PostInput() {
         AddPost(text)
     }
   return (
-    <div>PostInput
+    <div className="post-container">
         <input value={text} onChange={(e)=>setText(e.target.value)} 
+        placeholder="Add new post" className="input"
         />
-        <button type="submit" onClick={AddPosts}>ADD</button>
+        <a type="submit" onClick={AddPosts}>Add post</a>
     </div>
   )
 }
