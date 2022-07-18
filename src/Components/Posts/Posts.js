@@ -5,23 +5,24 @@ import Likes from '../Likes/Likes'
 import Comments from '../Comments/Comments'
 function Posts() {
     const {getAllPosts,allPost,name} = useContext(AuthContetx)
-    console.log(allPost,"===============")
+    // console.log(allPost,"===============",name)
     const [show,setShow] = useState(false)
     useEffect(()=>{
         getAllPosts()
     },[])
     const showComment= ()=>{
         setShow(true)
-        
+        console.log(show)
     }
   return (
     <div>
         <div>
-       get all posts {name}
+       get all posts 
       {allPost.map((item)=>
       
       <div>
         <p key={item.id}>{item.text}</p>
+        <p>{item.name}</p>
         <div>
             <CommentInput postId={item.id}/>
             <button onClick={showComment}>show comments

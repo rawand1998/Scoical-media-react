@@ -1,13 +1,16 @@
 import React,{useState,useContext} from 'react'
 import {AuthContetx} from '../../../context/Auth'
+import {useNavigate} from 'react-router-dom'
 function Register() {
     const [email,setEmail] = useState('')
     const [password,setPassword] = useState('')
     const [name,setName] = useState('')
     const {RegisterAuth} = useContext(AuthContetx)
+    const navigate = useNavigate()
    const Register = (e)=>{
     e.preventDefault()
     RegisterAuth(email, password,name)
+    navigate('/login')
    }
   return (
  

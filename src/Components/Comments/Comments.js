@@ -1,7 +1,7 @@
 import React,{useContext,useEffect} from 'react'
 import {AuthContetx} from '../../context/Auth'
 function Comments({postId}) {
-    console.log(postId)
+    // console.log(postId)
     const {getAllComment,comments}= useContext(AuthContetx)
     useEffect(()=>{
         getAllComment(postId)

@@ -26,13 +26,12 @@ const [name,setName] = useState("");
       console.error(err, "err");
     }
   };
-  // const getUsers=()=>{
-  //   db.collection('users').
-  // }
+
   const LoginAuth = async (email, password) => {
     try {
       await auth.signInWithEmailAndPassword(email, password).then((res) => {
         setUserId(res.user.uid);
+        console.log('User')
       });
     } catch (err) {
       console.log(err, "err");
@@ -60,6 +59,7 @@ const [name,setName] = useState("");
         uid: userid,
         postId: postId,
         comment: comment,
+        // name:name
       });
     } catch (err) {
       console.log(err);
@@ -95,6 +95,7 @@ const [name,setName] = useState("");
       setComments(
         snapshot.docs.map((item) => ({ ...item.data(), id: item.id }))
       );
+      console.log(snapshot.docs.map((item) => ({ ...item.data(), id: item.id })),"========")
     })
   }
 
