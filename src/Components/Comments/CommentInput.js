@@ -1,12 +1,13 @@
 import React,{useState,useContext} from 'react'
 import {AuthContetx} from '../../context/Auth'
 
-function CommentInput() {
+function CommentInput({postId}) {
     const [comment,setComment] =useState('')
+  
     const {AddComments} = useContext(AuthContetx)
     const AddComment=()=>{
         // check login
-        AddComments(comment)
+        AddComments(comment,postId)
     }
   return (
     <div>comment
