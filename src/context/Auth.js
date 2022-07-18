@@ -4,8 +4,9 @@ export const AuthContetx = React.createContext();
 
 function AuthProviders({ children }) {
   const [userid, setUserId] = useState("");
-  // const [postId,setPostId] = useState("");
-  const [allPost,setAllPost] = useState([]);
+  const [postsId,setPostsId] = useState("");
+  const [allPost, setAllPost] = useState([]);
+  const [comments,setComments]= useState([]);
 
   const RegisterAuth = async (email, password, name) => {
     try {
@@ -33,56 +34,74 @@ function AuthProviders({ children }) {
   const AddPost = async (text) => {
     console.log(text, "id", userid);
     try {
-      db.collection("posts").add({
-      
-        uid: userid,
-        text: text,
-      }).then((res)=>{
-      
-        // setPostId(res.id)
-        
-      })
+      db.collection("posts")
+        .add({
+          uid: userid,
+          text: text,
+        })
+        .then((res) => {
+          setPostsId(res.id)
+        });
     } catch (err) {
       console.log(err);
     }
   };
-  const AddComments = async (comment,postId) => {
+  const AddComments = async (comment, postId) => {
     try {
       db.collection("comments").add({
         uid: userid,
-        postId:postId,
+        postId: postId,
         comment: comment,
       });
     } catch (err) {
       console.log(err);
     }
   };
-  const AddLikes = async (likes,postId) => {
+  const AddLikes = async (likes, postId) => {
     try {
       db.collection("likes").add({
         uid: userid,
-        postId:postId,
+        postId: postId,
         likes: likes,
       });
     } catch (err) {
       console.log(err);
     }
   };
-  const getAllPosts = async()=>{
-    try{
-      db.collection("posts").onSnapshot((snapshot)=>{
-        setAllPost(snapshot.docs.map((item) => ({ ...item.data(), id: item.id })))
-    
-      })
+  const getAllPosts = async () => {
 
-    }catch (err) {
+    try {
+      db.collection("posts").onSnapshot((snapshot) => {
+        setAllPost(
+          snapshot.docs.map((item) => ({ ...item.data(), id: item.id }))
+        );
+      });
+    } catch (err) {
       console.log(err);
     }
-
+  };
+  const getAllComment= async(postId)=>{
+    console.log(postId)
+    
+    db.collection('comments').where('postId','==',postId).onSnapshot((snapshot) => {
+      setComments(
+        snapshot.docs.map((item) => ({ ...item.data(), id: item.id }))
+      );
+    })
   }
   return (
     <AuthContetx.Provider
-      value={{ RegisterAuth, LoginAuth, userid, AddPost, AddComments, AddLikes,getAllPosts,allPost }}
+      value={{
+        RegisterAuth,
+        LoginAuth,
+        userid,
+        AddPost,
+        AddComments,
+        AddLikes,
+        getAllPosts,
+        allPost,
+        getAllComment,comments
+      }}
     >
       {children}
     </AuthContetx.Provider>

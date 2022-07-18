@@ -11,7 +11,7 @@ function Likes({postId}) {
         AddLikes(likes,postId)
     }
   return (
-    <div>comment
+    <div>likes
       
         <button type="submit" onClick={incLikes}>ADD Likes {likes}</button>
     </div>

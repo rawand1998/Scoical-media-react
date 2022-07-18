@@ -12,7 +12,7 @@ function App() {
     
     {/* <Register /> */}
     <Login />
-    {/* <PostInput /> */}
+    <PostInput />
     <Posts />
     {/* <CommentInput /> */}
     {/* <Likes /> */}
