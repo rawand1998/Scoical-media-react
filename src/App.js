@@ -5,15 +5,17 @@ import Register from './Components/Auth/Register/Register';
 import PostInput from './Components/Posts/PostInput'
 import CommentInput from './Components/Comments/CommentInput'
 import Likes from './Components/Likes/Likes'
+import Posts from './Components/Posts/Posts';
 function App() {
   return (
     <div className="App">
     
     {/* <Register /> */}
     <Login />
-    <PostInput />
-    <CommentInput />
-    <Likes />
+    {/* <PostInput /> */}
+    <Posts />
+    {/* <CommentInput /> */}
+    {/* <Likes /> */}
     </div>
   );
 }

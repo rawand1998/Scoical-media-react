@@ -4,7 +4,8 @@ export const AuthContetx = React.createContext();
 
 function AuthProviders({ children }) {
   const [userid, setUserId] = useState("");
-  const [postId,setPostId] = useState("");
+  // const [postId,setPostId] = useState("");
+  const [allPost,setAllPost] = useState([]);
 
   const RegisterAuth = async (email, password, name) => {
     try {
@@ -33,18 +34,19 @@ function AuthProviders({ children }) {
     console.log(text, "id", userid);
     try {
       db.collection("posts").add({
+      
         uid: userid,
         text: text,
       }).then((res)=>{
       
-        setPostId(res.id)
+        // setPostId(res.id)
         
       })
     } catch (err) {
       console.log(err);
     }
   };
-  const AddComments = async (comment) => {
+  const AddComments = async (comment,postId) => {
     try {
       db.collection("comments").add({
         uid: userid,
@@ -55,7 +57,7 @@ function AuthProviders({ children }) {
       console.log(err);
     }
   };
-  const AddLikes = async (likes) => {
+  const AddLikes = async (likes,postId) => {
     try {
       db.collection("likes").add({
         uid: userid,
@@ -66,9 +68,21 @@ function AuthProviders({ children }) {
       console.log(err);
     }
   };
+  const getAllPosts = async()=>{
+    try{
+      db.collection("posts").onSnapshot((snapshot)=>{
+        setAllPost(snapshot.docs.map((item) => ({ ...item.data(), id: item.id })))
+    
+      })
+
+    }catch (err) {
+      console.log(err);
+    }
+
+  }
   return (
     <AuthContetx.Provider
-      value={{ RegisterAuth, LoginAuth, userid, AddPost, AddComments, AddLikes }}
+      value={{ RegisterAuth, LoginAuth, userid, AddPost, AddComments, AddLikes,getAllPosts,allPost }}
     >
       {children}
     </AuthContetx.Provider>
