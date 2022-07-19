@@ -9,13 +9,13 @@ function Posts() {
     // console.log(allPost,"===============",name)
     const navigate=useNavigate()
     const [show,setShow] = useState(false)
+  
     useEffect(()=>{
         getAllPosts()
     },[])
     const showComment= (id)=>{
         setShow(true)
         navigate(`/comment/${id}`)
-       
     }
   return (
     <div>
@@ -36,7 +36,7 @@ function Posts() {
             <CommentInput postId={item.id}/>
             <button onClick={()=>showComment(item.id)}>show comments
             </button>
-            {show?<div><Comments /></div>:<p>no</p>}
+            {/* {show?<div><Comments /></div>:<p></p>} */}
            
             {/* <Likes postId={item.id}/> */}
         </div>

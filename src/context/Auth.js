@@ -101,7 +101,7 @@ const [name,setName] = useState("");
   const getlike= async(postId)=>{
     console.log(postId)
     
-    db.collection('likes').where('postId','==',postId).onSnapshot((snapshot) => {
+    db.collection('likes').where('postId','==',postId.id).onSnapshot((snapshot) => {
       setlike(
         snapshot.docs.map((item) => ({ ...item.data(), id: item.id }))
       );
