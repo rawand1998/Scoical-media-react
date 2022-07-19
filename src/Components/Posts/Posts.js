@@ -2,17 +2,20 @@ import React ,{useContext,useEffect,useState}from 'react'
 import {AuthContetx} from '.././../context/Auth'
 import CommentInput from '../Comments/CommentInput'
 import Likes from '../Likes/Likes'
+import {useNavigate} from 'react-router-dom'
 import Comments from '../Comments/Comments'
 function Posts() {
     const {getAllPosts,allPost,name} = useContext(AuthContetx)
     // console.log(allPost,"===============",name)
+    const navigate=useNavigate()
     const [show,setShow] = useState(false)
     useEffect(()=>{
         getAllPosts()
     },[])
-    const showComment= ()=>{
+    const showComment= (id)=>{
         setShow(true)
-        console.log(show)
+        navigate(`/comment/${id}`)
+       
     }
   return (
     <div>
@@ -31,9 +34,9 @@ function Posts() {
         </div>
         <div>
             <CommentInput postId={item.id}/>
-            <button onClick={showComment}>show comments
+            <button onClick={()=>showComment(item.id)}>show comments
             </button>
-            {show?<div><Comments postId={item.id}/></div>:<p></p>}
+            {show?<div><Comments /></div>:<p>no</p>}
            
             {/* <Likes postId={item.id}/> */}
         </div>

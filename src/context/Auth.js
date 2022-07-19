@@ -91,12 +91,11 @@ const [name,setName] = useState("");
   const getAllComment= async(postId)=>{
     console.log(postId)
     
-    db.collection('comments').where('postId','==',postId).onSnapshot((snapshot) => {
-      setComments(
-        snapshot.docs.map((item) => ({ ...item.data(), id: item.id }))
-      );
-      console.log(snapshot.docs.map((item) => ({ ...item.data(), id: item.id })),"========")
+    db.collection('comments').where('postId','==',postId.id).onSnapshot((snapshot)=>{
+      setComments(snapshot.docs.map(doc => doc.data()))
+      console.log(comments)
     })
+
   }
 
   const getlike= async(postId)=>{
