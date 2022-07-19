@@ -8,6 +8,7 @@ function AuthProviders({ children }) {
   const [allPost, setAllPost] = useState([]);
   const [comments,setComments]= useState([]);
 const [name,setName] = useState("");
+const [profile,setProfile] = useState([])
   const [like,setlike] = useState([])
   const RegisterAuth = async (email, password, name) => {
     try {
@@ -107,6 +108,13 @@ const [name,setName] = useState("");
       );
     })
   }
+  const userProfile = (userId)=>{
+    console.log(userId.id)
+    db.collection('posts').where('uid','==',userId.id).onSnapshot((snapshot)=>{
+      setProfile(snapshot.docs.map(doc => doc.data()))
+      console.log(profile,"porfile from auth")
+    })
+  }
   return (
     <AuthContetx.Provider
       value={{
@@ -118,7 +126,7 @@ const [name,setName] = useState("");
         AddLikes,
         getAllPosts,
         allPost,
-        getAllComment,comments,like,getlike,name
+        getAllComment,comments,like,getlike,name,userProfile,profile
       }}
     >
       {children}
