@@ -33,10 +33,10 @@ function Posts() {
         <div>
           <div className="post-data">
             <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"/>
-        {userNames.map((user)=>
-         <p className="post-userName"  onClick={()=>profile(item.uid)}>{user.name}</p>
-        )}
-       
+
+         <p className="post-userName"  onClick={()=>profile(item.uid)}>{item.name}</p>
+        
+      
         </div>
         <p key={item.id }className="post-text">{item.text}</p>
        
