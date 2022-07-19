@@ -40,9 +40,7 @@ function Posts() {
             <CommentInput postId={item.id}/>
             <button onClick={()=>showComment(item.id)}>show comments
             </button>
-            {/* {show?<div><Comments /></div>:<p></p>} */}
-           
-            {/* <Likes postId={item.id}/> */}
+          
         </div>
         </div>
       )}

@@ -111,7 +111,8 @@ const [profile,setProfile] = useState([])
   const userProfile = (userId)=>{
     console.log(userId.id)
     db.collection('posts').where('uid','==',userId.id).onSnapshot((snapshot)=>{
-      setProfile(snapshot.docs.map(doc => doc.data()))
+      setProfile(snapshot.docs.map(doc => ({...doc.data(), id: doc.id}))
+      )
       console.log(profile,"porfile from auth")
     })
   }
