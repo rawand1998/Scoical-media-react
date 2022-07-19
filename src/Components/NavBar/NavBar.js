@@ -19,9 +19,9 @@ function NavBar() {
     <div className="nav-container">
       <h1>Soical Media</h1>
       <div className="nav">
-        {/* <p>{name}</p> */}
+     
         {userNames.map((item)=>
-        <p  onClick={()=>profile(item.uid)}>{item.name}</p>)}
+        <p  onClick={()=>profile(item.uid)} className="name">{item.name}</p>)}
         {users ?  <Link to="/" className="list">
           <Logout />
         </Link> :  <Link  className="list" to='/login'>Login</Link> }

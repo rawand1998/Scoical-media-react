@@ -1,0 +1,96 @@
+.login-pg{
+    height: 100vh;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-image: url(https://preview.colorlib.com/theme/capitalshop/assets/img/hero/h1_hero.jpg);
+  }
+  .login-form-area{
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -moz-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 15px 0;
+  }
+  .login-form{
+    background: #fff;
+    padding: 55px 60px 50px 50px;
+    box-shadow: 0 10px 30px 0 rgb(13 12 13 / 20%);
+    min-width: 700px;
+  }
+  .login-heading{
+    text-align: center;
+  }
+  .login-form-area .login-form .login-heading span {
+    color: #28957F;
+    font-size: 30px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    display: block;
+    text-transform: capitalize;
+  }
+  .login-form-area .login-form .login-heading p{
+    font-family: "Jost",sans-serif;
+    color: #301a22;
+    font-size: 16px;
+    line-height: 30px;
+    margin-bottom: 15px;
+    font-weight: 400;
+    line-height: 1.6;
+  }
+  .login-form-area .login-form .input-box {
+    padding-top: 35px;
+    padding-bottom: 75px;
+  }
+  .label {
+    display: flex;
+    font-size: 17px;
+    margin-bottom: 6px;
+    color: #28957F;
+    text-transform: capitalize;
+    font-weight: 500;
+    align-items:flex-start
+  }
+   .single-input-feilds input {
+    border: 1px solid #c9c9c9;
+    width: 100%;
+    height: 50px;
+    margin-bottom: 20px;
+    padding: 0 25px;
+    color: #000;
+    background-color: #fff;
+  }
+  
+
+ 
+.login-btns{
+    margin-top:15px;
+    display: flex;
+    justify-content: center;
+}
+.submit-btn3{
+    background: #28957F;
+    height: 60px;
+    padding: 10px 43px;
+    border: 1px  solid #ccc;
+    color: #ffff;
+    text-transform: capitalize;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 0;
+}
+.submit-btn3-register{
+    margin-left: 75%;
+}
