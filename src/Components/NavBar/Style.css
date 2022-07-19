@@ -1,5 +1,5 @@
 .nav-container{
-    background-color:#fafafa;
+    background-color:#28957F;
 display:flex;
 flex-direction:row;
 justify-content:space-between
@@ -14,10 +14,11 @@ justify-content:space-between
 }
 .nav .list{
   text-decoration: none;
-  color: #000000;
+  color: #ffff;
   
 }
 .nav-container h1{
     padding-left: 15px;
-    font-size:20px
+    font-size:20px;
+    color: #ffff;
 }
