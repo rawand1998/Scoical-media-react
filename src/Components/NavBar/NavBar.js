@@ -1,5 +1,5 @@
 import React ,{useContext,useEffect}from 'react'
-import {Link} from 'react-router-dom'
+import {Link,useNavigate} from 'react-router-dom'
 import './Style.css'
 import {AuthContetx} from '../../context/Auth'
 import { useAuthState } from "react-firebase-hooks/auth"
@@ -8,14 +8,12 @@ import Logout from '../Logout/Logout'
 function NavBar() {
   const {userName,userNames,users} = useContext(AuthContetx)
   console.log(userNames,"usernames")
-  // const [user] = useAuthState(auth);
-  // const users = auth.currentUser
-  // console.log(users.uid,"users")
+  const navigate=useNavigate()
   useEffect(()=>{
     userName()
   },[])
-  const logout = ()=>{
-    console.log("hi")
+  const profile = (id)=>{
+    navigate(`/profile/${id}`)
   }
   return (
     <div className="nav-container">
@@ -23,7 +21,7 @@ function NavBar() {
       <div className="nav">
         {/* <p>{name}</p> */}
         {userNames.map((item)=>
-        <p>{item.name}</p>)}
+        <p  onClick={()=>profile(item.uid)}>{item.name}</p>)}
         {users ?  <Link to="/" className="list">
           <Logout />
         </Link> :  <Link  className="list" to='/login'>Login</Link> }
