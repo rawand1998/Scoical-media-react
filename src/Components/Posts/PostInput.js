@@ -1,12 +1,19 @@
 import React,{useState,useContext} from 'react'
 import {AuthContetx} from '../../context/Auth'
 import './Style.css'
+import { auth,  } from "../../firebase/firebase";
 function PostInput() {
     const [text,setText] =useState('')
+    const users = auth.currentUser
     const {AddPost} = useContext(AuthContetx)
     const AddPosts=()=>{
         // check login
-        AddPost(text)
+        if(users.uid){
+          AddPost(text)
+        }else{
+          alert("Please login")
+        }
+       
     }
   return (
     <div className="post-container">

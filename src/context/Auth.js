@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { auth, db } from "../firebase/firebase";
+import { useAuthState } from "react-firebase-hooks/auth"
 export const AuthContetx = React.createContext();
 
 function AuthProviders({ children }) {
@@ -7,9 +8,12 @@ function AuthProviders({ children }) {
   const [postsId,setPostsId] = useState("");
   const [allPost, setAllPost] = useState([]);
   const [comments,setComments]= useState([]);
+const [user] = useAuthState(auth)
 const [name,setName] = useState("");
 const [profile,setProfile] = useState([])
   const [like,setlike] = useState([])
+  const[userNames,setUserNames] = useState([])
+  const users = auth.currentUser
   const RegisterAuth = async (email, password, name) => {
     try {
       await auth.createUserWithEmailAndPassword(email, password).then((res) => {
@@ -99,6 +103,7 @@ const [profile,setProfile] = useState([])
 
   }
 
+
   const getlike= async(postId)=>{
     console.log(postId)
     
@@ -116,6 +121,18 @@ const [profile,setProfile] = useState([])
       console.log(profile,"porfile from auth")
     })
   }
+
+  const userName = ()=>{
+
+    db.collection('users').where('uid','==',users.uid).onSnapshot((snapshot)=>{
+      console.log(snapshot,"snapshoe")
+      setUserNames(snapshot.docs.map(doc => ({...doc.data(), id: doc.id}))
+      )
+      console.log(userNames,"porfile from auth")
+    })
+  }
+
+
   return (
     <AuthContetx.Provider
       value={{
@@ -127,7 +144,7 @@ const [profile,setProfile] = useState([])
         AddLikes,
         getAllPosts,
         allPost,
-        getAllComment,comments,like,getlike,name,userProfile,profile
+        getAllComment,comments,like,getlike,name,userProfile,profile,userName,userNames,users
       }}
     >
       {children}
