@@ -19,14 +19,14 @@ function NavBar() {
     <div className="nav-container">
       <h1>Soical Media</h1>
       <div className="nav">
-     
+      <Link to='/' className="list">Home</Link>
         {userNames.map((item)=>
         <p  onClick={()=>profile(item.uid)} className="name">{item.name}</p>)}
         {users ?  <Link to="/" className="list">
           <Logout />
         </Link> :  <Link  className="list" to='/login'>Login</Link> }
       
-        <Link to='/profile' className="list">Profile</Link>
+     
         </div>
     </div>
   )

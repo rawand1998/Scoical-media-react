@@ -7,7 +7,6 @@ import {useNavigate} from 'react-router-dom'
 
 function Posts() {
     const {getAllPosts,allPost} = useContext(AuthContetx)
-    // console.log(allPost,"===============",name)
     const navigate=useNavigate()
     const [show,setShow] = useState(false)
  

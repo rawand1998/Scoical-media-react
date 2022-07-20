@@ -80,7 +80,7 @@ function AuthProviders({ children }) {
       console.log(err);
     }
   };
-  const getAllPosts = async (uid) => {
+  const getAllPosts = async () => {
     try {
       db.collection("posts").onSnapshot((snapshot) => {
         setAllPost(
@@ -132,6 +132,16 @@ function AuthProviders({ children }) {
         console.log(userNames, "porfile from auth");
       });
   };
+
+  const singlePost = (id)=>{
+    console.log(id,"id")
+    db.collection("posts")
+    .doc(id.id).get().then((doc)=>
+    
+    setGetUser(doc.data(),"doc"))
+    
+
+  }
   // const getUserName = () => {
    
   //   console.log(allPost,"uid post")
@@ -145,6 +155,8 @@ function AuthProviders({ children }) {
   return (
     <AuthContetx.Provider
       value={{
+        singlePost,
+        getUser,
         RegisterAuth,
         LoginAuth,
         userid,
@@ -163,6 +175,7 @@ function AuthProviders({ children }) {
         userName,
         userNames,
         users,
+
  
 
       }}
