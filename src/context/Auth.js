@@ -1,19 +1,20 @@
 import React, { useState } from "react";
 import { auth, db } from "../firebase/firebase";
-import { useAuthState } from "react-firebase-hooks/auth"
+import { useAuthState } from "react-firebase-hooks/auth";
 export const AuthContetx = React.createContext();
 
 function AuthProviders({ children }) {
   const [userid, setUserId] = useState("");
-  const [postsId,setPostsId] = useState("");
+  const [postsId, setPostsId] = useState("");
   const [allPost, setAllPost] = useState([]);
-  const [comments,setComments]= useState([]);
-const [user] = useAuthState(auth)
-const [name,setName] = useState("");
-const [profile,setProfile] = useState([])
-  const [like,setlike] = useState([])
-  const[userNames,setUserNames] = useState([])
-  const users = auth.currentUser
+  const [comments, setComments] = useState([]);
+  const [getUser, setGetUser] = useState([]);
+  const [user] = useAuthState(auth);
+  const [name, setName] = useState("");
+  const [profile, setProfile] = useState([]);
+  const [like, setlike] = useState([]);
+  const [userNames, setUserNames] = useState([]);
+  const users = auth.currentUser;
   const RegisterAuth = async (email, password, name) => {
     try {
       await auth.createUserWithEmailAndPassword(email, password).then((res) => {
@@ -22,10 +23,9 @@ const [profile,setProfile] = useState([])
           uid: user.uid,
           name: name,
           email: email,
-        })
-        setName(name)
-        console.log(name)
-        
+        });
+        setName(name);
+        console.log(name);
       });
     } catch (err) {
       console.error(err, "err");
@@ -36,23 +36,22 @@ const [profile,setProfile] = useState([])
     try {
       await auth.signInWithEmailAndPassword(email, password).then((res) => {
         setUserId(res.user.uid);
-        console.log('User')
+        console.log("User");
       });
     } catch (err) {
       console.log(err, "err");
     }
   };
   const AddPost = async (text) => {
-   
     try {
       db.collection("posts")
         .add({
           uid: userid,
           text: text,
-          name:name
+          name: name,
         })
         .then((res) => {
-          setPostsId(res.id)
+          setPostsId(res.id);
         });
     } catch (err) {
       console.log(err);
@@ -81,8 +80,7 @@ const [profile,setProfile] = useState([])
       console.log(err);
     }
   };
-  const getAllPosts = async () => {
-
+  const getAllPosts = async (uid) => {
     try {
       db.collection("posts").onSnapshot((snapshot) => {
         setAllPost(
@@ -93,45 +91,56 @@ const [profile,setProfile] = useState([])
       console.log(err);
     }
   };
-  const getAllComment= async(postId)=>{
-    console.log(postId)
-    
-    db.collection('comments').where('postId','==',postId.id).onSnapshot((snapshot)=>{
-      setComments(snapshot.docs.map(doc => doc.data()))
-      console.log(comments)
-    })
+  const getAllComment = async (postId) => {
+    console.log(postId);
 
-  }
+    db.collection("comments")
+      .where("postId", "==", postId.id)
+      .onSnapshot((snapshot) => {
+        setComments(snapshot.docs.map((doc) => doc.data()));
+        console.log(comments);
+      });
+  };
 
+  const getlike = async (postId) => {
+    console.log(postId);
 
-  const getlike= async(postId)=>{
-    console.log(postId)
-    
-    db.collection('likes').where('postId','==',postId.id).onSnapshot((snapshot) => {
-      setlike(
-        snapshot.docs.map((item) => ({ ...item.data(), id: item.id }))
-      );
-    })
-  }
-  const userProfile = (userId)=>{
-    console.log(userId.id)
-    db.collection('posts').where('uid','==',userId.id).onSnapshot((snapshot)=>{
-      setProfile(snapshot.docs.map(doc => ({...doc.data(), id: doc.id}))
-      )
-      console.log(profile,"porfile from auth")
-    })
-  }
+    db.collection("likes")
+      .where("postId", "==", postId.id)
+      .onSnapshot((snapshot) => {
+        setlike(snapshot.docs.map((item) => ({ ...item.data(), id: item.id })));
+      });
+  };
+  const userProfile = (userId) => {
+    console.log(userId.id);
+    db.collection("posts")
+      .where("uid", "==", userId.id)
+      .onSnapshot((snapshot) => {
+        setProfile(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+        console.log(profile, "porfile from auth");
+      });
+  };
 
-  const userName = ()=>{
-
-    db.collection('users').where('uid','==',users.uid).onSnapshot((snapshot)=>{
-      console.log(snapshot,"snapshoe")
-      setUserNames(snapshot.docs.map(doc => ({...doc.data(), id: doc.id}))
-      )
-      console.log(userNames,"porfile from auth")
-    })
-  }
-
+  const userName = () => {
+    db.collection("users")
+      .where("uid", "==", users.uid)
+      .onSnapshot((snapshot) => {
+        console.log(snapshot, "snapshoe");
+        setUserNames(
+          snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+        );
+        console.log(userNames, "porfile from auth");
+      });
+  };
+  // const getUserName = () => {
+   
+  //   console.log(allPost,"uid post")
+  //   db.collection("users").onSnapshot((snapshot) => {
+  //     console.log(snapshot, "snapshoe");
+  //     setGetUser(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+  //     console.log(getUser, "porfile from auth");
+  //   });
+  // };
 
   return (
     <AuthContetx.Provider
@@ -144,7 +153,18 @@ const [profile,setProfile] = useState([])
         AddLikes,
         getAllPosts,
         allPost,
-        getAllComment,comments,like,getlike,name,userProfile,profile,userName,userNames,users
+        getAllComment,
+        comments,
+        like,
+        getlike,
+        name,
+        userProfile,
+        profile,
+        userName,
+        userNames,
+        users,
+ 
+
       }}
     >
       {children}
