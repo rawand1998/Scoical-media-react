@@ -3,6 +3,7 @@
     padding: 5px;
     display:flex;
     align-items: flex-start;
+    width: 100%;
 }
 .comment-container img{
     height:40px;

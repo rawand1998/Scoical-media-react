@@ -37,6 +37,7 @@
   border-radius: 50%;
   margin-left: 15px;
   margin-top: 5px;
+  cursor: pointer;
 }
 .post-userName {
   display: flex;
@@ -44,10 +45,27 @@
   padding: 15px;
   margin-top: -0.5%;
   color: #fff;
+  cursor: pointer;
   font-weight: bold;
 }
 .post-text {
   display: flex;
   align-items: flex-start;
   padding-left: 15px;
+}
+.show-comment{
+  display: flex;
+  justify-content: space-between;
+}
+.show-comment .comment-input{
+  width:100%;
+}
+.show-comment-btn{
+  border: none;
+  width: 30%;
+  background-color: #F2F4FA;
+  cursor: pointer;
+}
+.show-comment-btn:hover{
+  background-color: #fafafa
 }

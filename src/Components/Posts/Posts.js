@@ -31,18 +31,18 @@ function Posts() {
       <div className="dispaly-post-container">
         <div>
           <div className="post-data" key={item.id }>
-            <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"/>
+            <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"  onClick={()=>profile(item.uid)}/>
 
-         <p className="post-userName"  onClick={()=>profile(item.uid)}>{item.name}</p>
+         <p className="post-userName" onClick={()=>profile(item.uid)}>{item.name}</p>
         
       
         </div>
         <p className="post-text">{item.text}</p>
        
         </div>
-        <div>
-            <CommentInput postId={item.id}/>
-            <button onClick={()=>showComment(item.id)}>show comments
+        <div className="show-comment">
+            <CommentInput postId={item.id} className="comment-input"/>
+            <button onClick={()=>showComment(item.id)} className="show-comment-btn">show comments...
             </button>
           
         </div>
