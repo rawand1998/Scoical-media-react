@@ -2,33 +2,49 @@ import React ,{useContext,useEffect,useState}from 'react'
 import {AuthContetx} from '.././../context/Auth'
 import CommentInput from '../Comments/CommentInput'
 import Likes from '../Likes/Likes'
-import Comments from '../Comments/Comments'
+
+import {useNavigate} from 'react-router-dom'
+
 function Posts() {
-    const {getAllPosts,allPost,name} = useContext(AuthContetx)
-    console.log(allPost,"===============")
+    const {getAllPosts,allPost} = useContext(AuthContetx)
+    const navigate=useNavigate()
     const [show,setShow] = useState(false)
+ 
     useEffect(()=>{
         getAllPosts()
     },[])
-    const showComment= ()=>{
+    const showComment= (id)=>{
+      
         setShow(true)
-        
+        navigate(`/comment/${id}`)
+    }
+    const profile = (id)=>{
+      console.log("cdc")
+      navigate(`/profile/${id}`)
     }
   return (
     <div>
         <div>
-       get all posts {name}
+    
       {allPost.map((item)=>
       
-      <div>
-        <p key={item.id}>{item.text}</p>
+      <div className="dispaly-post-container">
         <div>
-            <CommentInput postId={item.id}/>
-            <button onClick={showComment}>show comments
+          <div className="post-data" key={item.id }>
+            <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"  onClick={()=>profile(item.uid)}/>
+
+         <p className="post-userName" onClick={()=>profile(item.uid)}>{item.name}</p>
+        
+      
+        </div>
+        <p className="post-text">{item.text}</p>
+       
+        </div>
+        <div className="show-comment">
+            <CommentInput postId={item.id} className="comment-input"/>
+            <button onClick={()=>showComment(item.id)} className="show-comment-btn">show comments...
             </button>
-            {show?<div><Comments postId={item.id}/></div>:<p></p>}
-           
-            {/* <Likes postId={item.id}/> */}
+          
         </div>
         </div>
       )}
